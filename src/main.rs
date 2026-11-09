@@ -1,3 +1,5 @@
+use rand::{ rng, seq::SliceRandom };
+
 #[derive(Debug)]
 struct Deck {
     cards: Vec<String>,
@@ -23,9 +25,15 @@ impl Deck {
         //  this is called implicit return in Rust and the statement don't end with a semicolon.
         Deck { cards: cards }
     }
+
+    fn shuffle(&mut self) {
+        let mut rng = rng();
+        self.cards.shuffle(&mut rng);
+    }
 }
 
 fn main() {
-    let deck = Deck::new();
+    let mut deck = Deck::new();
+    deck.shuffle();
     println!("Here is the deck: {:#?}", deck);
 }
