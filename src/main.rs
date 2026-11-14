@@ -30,10 +30,21 @@ impl Deck {
         let mut rng = rng();
         self.cards.shuffle(&mut rng);
     }
+
+    fn deal(&mut self, numOfCards: usize) -> Vec<String> {
+        // This method takes a mutable reference to self and a number of cards to deal.
+        // It uses the split_off method to remove the specified number of cards from the end of the deck and return them as a new vector.
+        // The split_off method takes an index as an argument and splits the vector into two at that index.
+        // The original vector retains the elements before the index, and the new vector contains the elements from the index to the end.
+        // In this case, we want to split the vector at the index that is numOfCards from the end of the vector, which is calculated as self.cards.len() - numOfCards.
+        self.cards.split_off(self.cards.len() - numOfCards)
+    }
 }
 
 fn main() {
     let mut deck = Deck::new();
-    deck.shuffle();
+    //deck.shuffle();
+    let dealt_cards = deck.deal(5);
+    println!("Here are the dealt cards: {:#?}", dealt_cards);
     println!("Here is the deck: {:#?}", deck);
 }
